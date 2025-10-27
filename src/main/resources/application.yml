@@ -6,7 +6,7 @@ spring:
     name: ms-ticket
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ticketdb
+    url: jdbc:postgresql://shared-postgres:5432/ticketdb
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
