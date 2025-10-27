@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-ticket-deployment
+  labels:
+    app: ms-ticket
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-ticket
+  template:
+    metadata:
+      labels:
+        app: ms-ticket
+    spec:
+      containers:
+        - name: ms-ticket
+          image: docker.io/mmmdliayxan321/ms-ticket:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://shared-postgres:5432/ticketdb"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "password"
