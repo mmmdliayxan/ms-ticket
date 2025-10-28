@@ -3,6 +3,7 @@ package com.example.msticket.service;
 import com.example.msticket.client.EventClient;
 import com.example.msticket.client.PaymentOrchestratorClient;
 import com.example.msticket.dto.request.PaymentRequestDto;
+import com.example.msticket.dto.request.SagaStartRequest;
 import com.example.msticket.dto.request.TicketOrderRequest;
 import com.example.msticket.dto.request.TicketRequest;
 import com.example.msticket.dto.response.TicketOrderResponse;
@@ -77,7 +78,7 @@ public class TicketOrderService {
         order.setStatus(TicketOrderStatus.PENDING);
         orderRepository.save(order);
 
-        orchestratorClient.startSaga(order,paymentRequestDto);
+        orchestratorClient.startSaga(new SagaStartRequest(order, paymentRequestDto));
         log.info("Order created with id={} for user {}", order.getId(), userId);
 
         return mapper.toDto(order);
